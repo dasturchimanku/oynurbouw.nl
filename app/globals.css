@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #fc5000;
+  --color-brand-600: #e04600;
+  --color-brand-700: #b83900;
+  --color-brand-50: #fff4ec;
+  --color-brand-100: #ffe3d0;
+  --color-ink: #15120f;
+  --color-ink-800: #26211c;
+  --color-ink-700: #3a342e;
+  --color-paper: #faf7f3;
+  --color-sand: #f1ebe3;
+  --color-stone: #6f675f;
+  --color-line: #e6ded4;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Archivo Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(21 18 15 / 0.04), 0 8px 24px -8px rgb(21 18 15 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(21 18 15 / 0.05), 0 24px 48px -16px rgb(21 18 15 / 0.25);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-stretch: 105%;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+/* Admin form controls & shared components */
+@utility container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+@utility eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-brand uppercase;
+    &::before {
+    content: "";
+    @apply inline-block h-px w-6 bg-current;
+    }
+}
+
+@utility btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+@utility btn-primary {
+    @apply btn bg-brand text-white shadow-[0_8px_24px_-8px_rgb(252_80_0/0.6)] hover:bg-brand-600 hover:shadow-[0_12px_28px_-8px_rgb(252_80_0/0.7)];
+  }
+
+@utility btn-dark {
+    @apply btn bg-ink text-white hover:bg-ink-800;
+  }
+
+@utility btn-ghost {
+    @apply btn border border-current/20 hover:border-current/50;
+  }
+
+@utility card {
+    @apply rounded-[var(--radius-card)] bg-white shadow-soft;
+  }
+
+@utility prose-ob {
+    @apply space-y-4 text-[1.0625rem] leading-relaxed text-ink-700;
+    & h2 {
+    @apply pt-4 text-2xl font-bold text-ink;
+    }
+  & h3 {
+    @apply pt-2 text-lg font-bold text-ink;
+    }
+  & ul {
+    @apply list-disc space-y-1 pl-5;
+    }
+  & a {
+    @apply font-medium text-brand underline underline-offset-2;
+    }
+}
+
+@utility blueprint {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+@utility blueprint-light {
+    background-image:
+      linear-gradient(rgb(21 18 15 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(21 18 15 / 0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+@utility field {
+    @apply block w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-xs outline-none transition placeholder:text-stone/60 focus:border-brand focus:ring-4 focus:ring-brand/15;
+  }
+
+@utility label {
+    @apply mb-1.5 block text-sm font-medium text-ink-700;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
